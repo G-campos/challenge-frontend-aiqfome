@@ -1,0 +1,60 @@
+$primary: #41B883;
+
+$secundary: #35495E;
+$secundary_light: rgba(53, 73, 94, 0.3);
+
+$success: #12A454;
+$success_light: rgba(18, 164, 84, 0.5);
+
+$attention: #E83F5B;
+$attention_light: rgba(232, 63, 91, 0.5);
+
+$shape: #606060;
+$shape_dark: #0F0F0F;
+
+$title: #FFE81F;
+$text: #FAFAFA;
+$text_dark: #606060;
+$background: #000000;
+
+//class
+.primary {
+  background: $primary;
+  color: $primary;
+}
+
+.secundary {
+  background: $secundary;
+  color: $secundary;
+}
+
+.secundary_light {
+  background: $secundary_light;
+  color: $secundary_light;
+}
+
+$secundary_light: rgba(53, 73, 94, 0.3);
+
+$success: #12A454;
+$success_light: rgba(18, 164, 84, 0.5);
+
+$attention: #E83F5B;
+$attention_light: rgba(232, 63, 91, 0.5);
+
+$shape: #606060;
+$shape_dark: #0F0F0F;
+
+$title: #FFE81F;
+$text: #FAFAFA;
+$text_dark: #606060;
+
+.bg {
+  background: $background;
+  color: $background;
+}
+
+//@font-face {
+//  font-family: 'Star Jedi';
+//  src: url('./fonts/StarJedi-DGRW.ttf') type-of('ttf');
+//}
+
