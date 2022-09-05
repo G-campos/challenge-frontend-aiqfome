@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div class="container bg-blackout">
     <v-app-bar
         app
         color="shape_dark"
@@ -7,22 +7,20 @@
     >
       <div class="d-flex align-center">
         <v-img
-            alt="Vuetify Logo"
+            alt="Star Wars Logo"
             class="shrink mr-2"
             contain
+            min-width="100"
             src="https://www.citypng.com/public/uploads/preview/-51608495204iyvpoqgita.png"
             transition="scale-transition"
-            width="40"
-        />
-
-        <v-img
-            alt="Vuetify Name"
-            class="shrink mt-1 hidden-sm-and-down"
-            contain
-            min-width="100"
-            src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
             width="100"
         />
+
+        <span class="title">
+          <strong>
+            CASTING
+          </strong>
+        </span>
       </div>
 
       <v-spacer></v-spacer>
@@ -40,7 +38,7 @@
     <v-main class="bg">
       <router-view />
     </v-main>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -50,5 +48,8 @@ export default {
 </script>
 
 <style scoped>
-
+.container {
+  margin: 0;
+  border: 0;
+}
 </style>
