@@ -19,38 +19,107 @@ $background: #000000;
 
 //class
 .primary {
-  background: $primary;
   color: $primary;
 }
 
+.bg-primary {
+  background: $primary;
+}
+
 .secundary {
-  background: $secundary;
   color: $secundary;
 }
 
+.bg-secundary {
+  background: $secundary;
+}
+
 .secundary_light {
-  background: $secundary_light;
   color: $secundary_light;
 }
 
-$secundary_light: rgba(53, 73, 94, 0.3);
+.bg-secundary_light {
+  background: $secundary_light;
+}
 
-$success: #12A454;
-$success_light: rgba(18, 164, 84, 0.5);
+.success {
+  color: $success;
+}
 
-$attention: #E83F5B;
-$attention_light: rgba(232, 63, 91, 0.5);
+.bg-success {
+  background: $success;
+}
 
-$shape: #606060;
-$shape_dark: #0F0F0F;
+.success_light {
+  color: $success_light;
+}
 
-$title: #FFE81F;
-$text: #FAFAFA;
-$text_dark: #606060;
+.bg-success_light {
+  background: $success_light;
+}
 
-.bg {
-  background: $background;
+.attention {
+  color: $attention;
+}
+
+.bg-attention {
+  background: $attention;
+}
+
+.attention_light {
+  color: $attention_light;
+}
+
+.bg-attention_light {
+   background: $attention_light;
+}
+
+.shape {
+  color: $shape;
+}
+
+.bg-shape {
+  background: $shape;
+}
+
+.shape_dark {
+  color: $shape_dark;
+}
+
+.bg-shape_dark {
+  background: $shape_dark;
+}
+
+.title {
+  color: $title;
+}
+
+.bg-title {
+  background: $title;
+}
+
+.text {
+  color: $text;
+}
+
+.bg-text {
+  background: $text;
+}
+
+.text_dark {
+  color: $text_dark;
+}
+
+.bg-text_dark {
+  background: $text_dark;
+}
+
+.blackout {
   color: $background;
+}
+
+.bg-blackout {
+  background: $background;
 }
 
 //@font-face {
