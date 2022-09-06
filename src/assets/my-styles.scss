@@ -122,8 +122,8 @@ $background: #000000;
   background: $background;
 }
 
-//@font-face {
-//  font-family: 'Star Jedi';
-//  src: url('./fonts/StarJedi-DGRW.ttf') type-of('ttf');
-//}
+@font-face {
+  font-family: 'StarJedi';
+  src: url('@/assets/fonts/star-jedi-font/StarJedi-Regular.ttf') format('truetype');
+}
 
