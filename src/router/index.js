@@ -6,7 +6,7 @@ import Home from "@/pages/Home";
 import Films from "@/pages/Films";
 import FilmsDetails from "@/pages/FilmsDetails";
 import Casting from "@/pages/Casting";
-import Character from "@/pages/Character";
+import Character from "@/pages/CharacterDetails";
 
 Vue.use(VueRouter)
 
@@ -49,7 +49,6 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
 
