@@ -4,8 +4,12 @@
         app
         color="shape_dark"
         dark
+        class="justify-space-between"
     >
-      <div class="d-flex align-center">
+      <div
+          @click="$router.push('/')"
+          class="d-flex align-center"
+      >
         <v-img
             alt="Star Wars Logo"
             class="shrink mr-2"
@@ -16,22 +20,36 @@
             width="100"
         />
 
-        <span class="title">
-          <strong>
-            CASTING
-          </strong>
+        <span class="font-tittle">
+          CASTING
         </span>
       </div>
 
-      <v-spacer></v-spacer>
+      <v-btn
+        rounded
+        @click="$router.push('/characters')"
+      >
+        <span class="text">
+          <strong>PERSONAGENS</strong>
+        </span>
+      </v-btn>
 
       <v-btn
-          href="https://github.com/vuetifyjs/vuetify/releases/latest"
-          target="_blank"
-          text
+          rounded
+          @click="$router.push('/films')"
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <span class="text">
+          <strong>FILMES</strong>
+        </span>
+      </v-btn>
+
+      <v-btn
+          @click="$router.push('/casting')"
+          class="bordered-custom"
+      >
+        <span class="text">
+          CADASTRAR-SE
+        </span>
       </v-btn>
     </v-app-bar>
 
@@ -47,9 +65,21 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/my-styles.scss";
+
 .container {
   margin: 0;
   border: 0;
+}
+
+.bordered-custom {
+  border: solid 2px $title !important;
+}
+
+.font-tittle {
+  font-family: 'StarJedi', Roboto, sans-serif;
+  font-size: 20px;
+  color: $title;
 }
 </style>
