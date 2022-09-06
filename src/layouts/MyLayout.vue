@@ -4,11 +4,11 @@
         app
         color="shape_dark"
         dark
-        class="justify-space-between"
+        class="navbar"
     >
       <div
           @click="$router.push('/')"
-          class="d-flex align-center"
+          class="mavbar__logo"
       >
         <v-img
             alt="Star Wars Logo"
@@ -20,9 +20,9 @@
             width="100"
         />
 
-        <span class="font-tittle">
+        <h1 class="font-tittle">
           CASTING
-        </span>
+        </h1>
       </div>
 
       <v-btn
@@ -73,13 +73,29 @@ export default {
   border: 0;
 }
 
-.bordered-custom {
-  border: solid 2px $title !important;
+.navbar {
+  display: flex;
+
+  flex-direction: row;
+  justify-items: center;
+}
+
+.mavbar__logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
 }
 
 .font-tittle {
   font-family: 'StarJedi', Roboto, sans-serif;
   font-size: 20px;
+  font-weight: bold;
   color: $title;
+  padding-right: 2rem;
+}
+
+.bordered-custom {
+  border: solid 2px $title !important;
 }
 </style>
