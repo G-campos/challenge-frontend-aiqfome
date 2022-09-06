@@ -23,7 +23,7 @@ const routes = [
         path: '/films',
         component: Films,
         children: [{
-          path: '/details/:name',
+          path: '/films-details/:name',
           component: FilmsDetails
         }],
       },
@@ -32,9 +32,16 @@ const routes = [
         component: Casting
       },
       {
-        path: '/character/:name',
-        component: Character
+        path: '/characters',
+        component: Character,
+        children: [
+          {
+            path: '/character/:name',
+            component: Character
+          },
+        ]
       },
+
     ]
   },
 
