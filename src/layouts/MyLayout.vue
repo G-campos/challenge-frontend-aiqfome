@@ -78,6 +78,8 @@ export default {
 
   flex-direction: row;
   justify-items: center;
+
+  padding-bottom: 1px;
 }
 
 .mavbar__logo {
@@ -89,10 +91,10 @@ export default {
 
 .font-tittle {
   font-family: 'StarJedi', Roboto, sans-serif;
-  font-size: 20px;
   font-weight: bold;
   color: $title;
   padding-right: 2rem;
+  justify-self: center;
 }
 
 .bordered-custom {
