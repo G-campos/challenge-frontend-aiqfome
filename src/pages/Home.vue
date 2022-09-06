@@ -1,40 +1,68 @@
 <template>
   <v-container class="container">
-    <section class="characters__row-title">
-      <h1 class="characters__title">PERSONAGENS</h1>
-    </section>
-    <section class="characters__row-input">
-      <v-input
-          class="characters__search"
-          prepend-icon="mdi-search"
-      >
-        FILTRE POR NOME DO PERSONAGEM
-      </v-input>
-    </section>
-    <section class="characters__row-characters"></section>
+    <v-row>
+      <v-col cols="12">
+        <h1 class="characters__title">PERSONAGENS</h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <v-text-field
+            v-model="searchCharacter"
+            class="characters__search"
+            label="FILTRE POR NOME DO PERSONAGEM"
+            :hint="mesage"
+            dense
+        >
+          <template v-slot:prepend>
+            <v-icon
+                @click="getCharacters(searchCharacter)"
+                class="characters__search-icon">
+              mdi mdi-magnify
+            </v-icon>
+          </template>
+        </v-text-field>
+      </v-col>
+    </v-row>
+    <v-row class="characters__row-characters">
+      <characters-card
+        v-for="(character, index) in listCharacters"
+        :key="index + 'character'"
+        :character="character"
+      />
+    </v-row>
   </v-container>
 </template>
 
 <script>
+import CharactersCard from "@/components/CharactersCard";
 export default {
   name: 'HomePage',
-
+  components: {CharactersCard},
   data: () => ({
     listCharacters: [],
     nextPage: '',
     prevPage: '',
+    searchCharacter: '',
+    mesage: '',
+    debouncedGetAnswer: ''
   }),
+
 
   mounted() {
     this.getCharacters()
   },
 
   methods: {
-    async getCharacters() {
-      await this.http.get('people/')
+    async getCharacters(search) {
+      let uri = search ? `/people&name=${search}` : '/people'
+
+      await this.http.get(`${uri}`)
           .then((r) => {
-              this.listCharacters = r.data.results
-              console.log(this.listCharacters)
+            this.listCharacters = r.data.results
+            return console.log('listCharacters=> ',this.listCharacters)
+          }).finally(() => {
+              return this.mesage = ''
           })
     }
   },
@@ -43,22 +71,17 @@ export default {
 <style lang="scss">
 @import "@/assets/my-styles.scss";
 .container{
-  min-width: 100%;
-  min-height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
 
   display: flex;
-
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
-.characters__row-title{
-  justify-items: center;
-}
-
-.characters__tittle {
+.characters__title {
   font-family: 'StarJedi';
-  font-size: 20px;
   font-weight: bold;
   color: $title;
   padding-right: 2rem;
@@ -68,7 +91,14 @@ export default {
 }
 
 .characters__search{
-  color: $text;
   background: $shape;
+  max-width: 570px;
+  border: solid 2px #606060 !important;
+  color: $text;
+
+  .characters__search-icon{
+    color: $text;
+  }
 }
+
 </style>
