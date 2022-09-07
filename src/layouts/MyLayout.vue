@@ -4,53 +4,54 @@
         app
         color="shape_dark"
         dark
-        class="navbar"
     >
-      <div
-          @click="$router.push('/')"
-          class="mavbar__logo"
-      >
-        <v-img
-            alt="Star Wars Logo"
-            class="shrink mr-2"
-            contain
-            min-width="100"
-            src="https://www.citypng.com/public/uploads/preview/-51608495204iyvpoqgita.png"
-            transition="scale-transition"
-            width="100"
-        />
+      <div class="navbar">
+        <div
+            @click="$router.push('/')"
+            class="mavbar__logo"
+        >
+          <v-img
+              alt="Star Wars Logo"
+              class="shrink mr-2"
+              contain
+              min-width="100"
+              src="https://www.citypng.com/public/uploads/preview/-51608495204iyvpoqgita.png"
+              transition="scale-transition"
+              width="100"
+          />
 
-        <h1 class="font-tittle">
-          CASTING
-        </h1>
-      </div>
+          <h1 class="font-tittle">
+            CASTING
+          </h1>
+        </div>
 
-      <v-btn
-        rounded
-        @click="$router.push('/characters')"
-      >
+        <v-btn
+            rounded
+            @click="$router.push('/characters')"
+        >
         <span class="text">
           <strong>PERSONAGENS</strong>
         </span>
-      </v-btn>
+        </v-btn>
 
-      <v-btn
-          rounded
-          @click="$router.push('/films')"
-      >
+        <v-btn
+            rounded
+            @click="$router.push('/films')"
+        >
         <span class="text">
           <strong>FILMES</strong>
         </span>
-      </v-btn>
+        </v-btn>
 
-      <v-btn
-          @click="$router.push('/casting')"
-          class="bordered-custom"
-      >
+        <v-btn
+            @click="$router.push('/casting')"
+            class="bordered-custom"
+        >
         <span class="text">
           CADASTRAR-SE
         </span>
-      </v-btn>
+        </v-btn>
+      </div>
     </v-app-bar>
 
     <v-main class="bg">
@@ -74,9 +75,11 @@ export default {
 }
 
 .navbar {
+  width: 100vw;
   display: flex;
-
   flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   justify-items: center;
 
   padding-bottom: 1px;

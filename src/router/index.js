@@ -3,10 +3,11 @@ import VueRouter from 'vue-router'
 
 import MyLayout from "@/layouts/MyLayout";
 import Home from "@/pages/Home";
+import Characters from "@/pages/Characters";
+import CharacterDetails from "@/pages/CharacterDetails";
 import Films from "@/pages/Films";
 import FilmsDetails from "@/pages/FilmsDetails";
 import Casting from "@/pages/Casting";
-import Character from "@/pages/CharacterDetails";
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,16 @@ const routes = [
         component: Home
       },
       {
+        path: '/characters',
+        component: Characters,
+        children: [
+          {
+            path: '/character/:name',
+            component: CharacterDetails
+          },
+        ]
+      },
+      {
         path: '/films',
         component: Films,
         children: [{
@@ -31,17 +42,6 @@ const routes = [
         path: '/casting',
         component: Casting
       },
-      {
-        path: '/characters',
-        component: Character,
-        children: [
-          {
-            path: '/character/:name',
-            component: Character
-          },
-        ]
-      },
-
     ]
   },
 

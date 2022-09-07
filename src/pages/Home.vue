@@ -1,112 +1,151 @@
 <template>
-  <v-container class="container">
-    <v-row class="characters__row-characters">
-
+  <v-container>
+    <v-row class="text-center">
       <v-col cols="12">
-        <h1 class="characters__title">PERSONAGENS</h1>
+        <v-img
+            :src="require('../assets/logo.svg')"
+            class="my-3"
+            contain
+            height="200"
+        />
       </v-col>
 
-      <v-col cols="12">
-        <v-text-field
-            v-model="searchCharacter"
-            class="characters__search"
-            dense
-        >
-          <template v-slot:prepend>
-            <v-icon
-                @click="getCharacters(searchCharacter)"
-                class="characters__search-icon">
-              mdi mdi-magnify
-            </v-icon>
-          </template>
-          <template v-slot:label>
-            <span class="characters__search-label">
-              FILTRE POR NOME DO PERSONAGEM
-            </span>
-          </template>
-        </v-text-field>
+      <v-col class="mb-4">
+        <h1 class="display-2 font-weight-bold mb-3">
+          Welcome to Vuetify
+        </h1>
+
+        <p class="subheading font-weight-regular">
+          For help and collaboration with other Vuetify developers,
+          <br>please join our online
+          <a
+              href="https://community.vuetifyjs.com"
+              target="_blank"
+          >Discord Community</a>
+        </p>
       </v-col>
 
-      <characters-card
-        v-for="(character, index) in listCharacters"
-        :key="index + 'character'"
-        :character="character"
-      />
+      <v-col
+          class="mb-5"
+          cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-3">
+          What's next?
+        </h2>
+
+        <v-row justify="center">
+          <a
+              v-for="(next, i) in whatsNext"
+              :key="i"
+              :href="next.href"
+              class="subheading mx-3"
+              target="_blank"
+          >
+            {{ next.text }}
+          </a>
+        </v-row>
+      </v-col>
+
+      <v-col
+          class="mb-5"
+          cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-3">
+          Important Links
+        </h2>
+
+        <v-row justify="center">
+          <a
+              v-for="(link, i) in importantLinks"
+              :key="i"
+              :href="link.href"
+              class="subheading mx-3"
+              target="_blank"
+          >
+            {{ link.text }}
+          </a>
+        </v-row>
+      </v-col>
+
+      <v-col
+          class="mb-5"
+          cols="12"
+      >
+        <h2 class="headline font-weight-bold mb-3">
+          Ecosystem
+        </h2>
+
+        <v-row justify="center">
+          <a
+              v-for="(eco, i) in ecosystem"
+              :key="i"
+              :href="eco.href"
+              class="subheading mx-3"
+              target="_blank"
+          >
+            {{ eco.text }}
+          </a>
+        </v-row>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-import CharactersCard from "@/components/CharactersCard";
 export default {
-  name: 'HomePage',
-  components: {CharactersCard},
+  name: 'FilmsPage',
+
   data: () => ({
-    listCharacters: [],
-    nextPage: '',
-    prevPage: '',
-    searchCharacter: '',
-    mesage: '',
-    debouncedGetAnswer: ''
+    ecosystem: [
+      {
+        text: 'vuetify-loader',
+        href: 'https://github.com/vuetifyjs/vuetify-loader',
+      },
+      {
+        text: 'github',
+        href: 'https://github.com/vuetifyjs/vuetify',
+      },
+      {
+        text: 'awesome-vuetify',
+        href: 'https://github.com/vuetifyjs/awesome-vuetify',
+      },
+    ],
+    importantLinks: [
+      {
+        text: 'Documentation',
+        href: 'https://vuetifyjs.com',
+      },
+      {
+        text: 'Chat',
+        href: 'https://community.vuetifyjs.com',
+      },
+      {
+        text: 'Made with Vuetify',
+        href: 'https://madewithvuejs.com/vuetify',
+      },
+      {
+        text: 'Twitter',
+        href: 'https://twitter.com/vuetifyjs',
+      },
+      {
+        text: 'Articles',
+        href: 'https://medium.com/vuetify',
+      },
+    ],
+    whatsNext: [
+      {
+        text: 'Explore components',
+        href: 'https://vuetifyjs.com/components/api-explorer',
+      },
+      {
+        text: 'Select a layout',
+        href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
+      },
+      {
+        text: 'Frequently Asked Questions',
+        href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
+      },
+    ],
   }),
-
-
-  mounted() {
-    this.getCharacters()
-  },
-
-  methods: {
-    async getCharacters(search) {
-      let uri = search ? `/people&name=${search}` : '/people'
-
-      await this.http.get(`${uri}`)
-          .then((r) => {
-            this.listCharacters = r.data.results
-            return console.log('listCharacters=> ',this.listCharacters)
-          }).catch((e) => {
-            console.error(e)
-          }).finally(() => {
-              return this.mesage = ''
-          })
-    }
-  },
 }
 </script>
-<style lang="scss">
-@import "@/assets/my-styles.scss";
-.container{
-  min-width: 100vw;
-  min-height: 100vh;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.characters__title {
-  font-family: 'StarJedi';
-  font-weight: bold;
-  color: $title;
-  padding-right: 2rem;
-  text-align: center;
-  letter-spacing: 1.6px;
-  opacity: 1;
-}
-
-.characters__search{
-  background: $shape;
-  max-width: 570px;
-  border: solid 2px #606060 !important;
-  color: $text;
-
-  .characters__search-icon{
-    color: $text;
-  }
-
-  .characters__search-label{
-    color: $text;
-  }
-}
-
-</style>
