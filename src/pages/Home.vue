@@ -1,17 +1,15 @@
 <template>
   <v-container class="container">
-    <v-row>
+    <v-row class="characters__row-characters">
+
       <v-col cols="12">
         <h1 class="characters__title">PERSONAGENS</h1>
       </v-col>
-    </v-row>
-    <v-row>
+
       <v-col cols="12">
         <v-text-field
             v-model="searchCharacter"
             class="characters__search"
-            label="FILTRE POR NOME DO PERSONAGEM"
-            :hint="mesage"
             dense
         >
           <template v-slot:prepend>
@@ -21,10 +19,14 @@
               mdi mdi-magnify
             </v-icon>
           </template>
+          <template v-slot:label>
+            <span class="characters__search-label">
+              FILTRE POR NOME DO PERSONAGEM
+            </span>
+          </template>
         </v-text-field>
       </v-col>
-    </v-row>
-    <v-row class="characters__row-characters">
+
       <characters-card
         v-for="(character, index) in listCharacters"
         :key="index + 'character'"
@@ -61,6 +63,8 @@ export default {
           .then((r) => {
             this.listCharacters = r.data.results
             return console.log('listCharacters=> ',this.listCharacters)
+          }).catch((e) => {
+            console.error(e)
           }).finally(() => {
               return this.mesage = ''
           })
@@ -97,6 +101,10 @@ export default {
   color: $text;
 
   .characters__search-icon{
+    color: $text;
+  }
+
+  .characters__search-label{
     color: $text;
   }
 }
