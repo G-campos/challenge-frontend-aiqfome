@@ -1,5 +1,5 @@
 <template>
-  <v-card class="card-character__container">
+  <div class="card-character__container">
     <v-row>
       <v-col cols="12">
         <h3 class="card-character__name">{{ character.name }}</h3>
@@ -28,9 +28,10 @@
         >
           {{ vehicle }}
         </span> <br>
+        {{ listVehicles }}
       </v-col>
     </v-row>
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -46,13 +47,20 @@ export default {
   },
   data: () => ({
     homeworld: {},
-    vehicleDetails: {}
+    listVehicles: []
   }),
 
   mounted() {
     this.getHomeworld(this.character.homeworld)
-    this.getVehicle(this.character.vehicles)
 
+    if (this.character.vehicles.length() < 1) {
+      this.getVehicle(this.character.vehicles)
+    } else {
+      for (const vehicle in this.character.vehicles) {
+        console.log('vehicle =>', vehicle)
+        this.getVehicle(vehicle)
+      }
+    }
   },
 
   methods: {
@@ -61,15 +69,20 @@ export default {
           .then((r) => {
             this.homeworld = r.data
             return console.log('homeworld=> ', this.homeworld)
+          }).catch((e) => {
+            console.error(e)
           }).finally(() => {
             return this.mesage = ''
           })
     },
     async getVehicle(search) {
+      console.log('getVehicle search=> ', search)
       await axios.get(`${search}`)
           .then((r) => {
-            this.homeworld = r.data
-            return console.log('homeworld=> ', this.homeworld)
+            this.listVehicles.push(r.data)
+            return console.log('listVehicle=> ', this.listVehicles)
+          }).catch((e) => {
+            console.error(e)
           }).finally(() => {
             return this.mesage = ''
           })
@@ -78,7 +91,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import "@/assets/my-styles.scss";
+
 .card-character__container{
   background: $shape;
   max-width: 570px;
