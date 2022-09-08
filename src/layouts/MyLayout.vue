@@ -4,6 +4,7 @@
         app
         color="shape_dark"
         dark
+        class="navbar-container"
     >
       <div class="navbar">
         <div
@@ -74,15 +75,21 @@ export default {
   border: 0;
 }
 
-.navbar {
+.navbar-container{
   width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   justify-items: center;
+}
 
-  padding-bottom: 1px;
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  justify-items: center;
 }
 
 .mavbar__logo {
