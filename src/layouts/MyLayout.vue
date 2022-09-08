@@ -63,7 +63,12 @@
 
 <script>
 export default {
-  name: "MyLayout"
+  name: "MyLayout",
+
+  mounted() {
+    console.log('this.$router.currentRoute.path === \'/films\' => ',this.$router.currentRoute.path === '/films')
+    console.log('this.$router.currentRoute.path === \'/characters\' => ',this.$router.currentRoute.path === '/characters')
+  }
 }
 </script>
 
