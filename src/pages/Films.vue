@@ -1,26 +1,26 @@
 <template>
   <v-container class="container">
-    <v-row class="characters__row-characters">
+    <v-row class="films__row-sub-container">
 
       <v-col cols="12">
-        <h1 class="characters__title">FILMES</h1>
+        <h1 class="films__title">FILMES</h1>
       </v-col>
 
       <v-col cols="12">
         <v-text-field
             v-model="searchCharacter"
-            class="characters__search"
+            class="films__search"
             dense
         >
           <template v-slot:prepend>
             <v-icon
                 @click="getCharacters(searchCharacter)"
-                class="characters__search-icon">
+                class="films__search-icon">
               mdi mdi-magnify
             </v-icon>
           </template>
           <template v-slot:label>
-            <span class="characters__search-label">
+            <span class="films__search-label">
               FILTRE POR NOME DO FILME
             </span>
           </template>
@@ -114,7 +114,11 @@ export default {
   padding-left: 5vw;
 }
 
-.characters__title {
+.films__row-sub-container{
+  max-width: 60vw;
+}
+
+.films__title {
   font-family: 'StarJedi';
   font-weight: bold;
   color: $title;
@@ -122,7 +126,7 @@ export default {
   opacity: 1;
 }
 
-.characters__search{
+.films__search{
   background: $shape;
   max-width: 570px;
   border: solid 2px #606060 !important;
@@ -130,11 +134,11 @@ export default {
   align-content: center;
   align-items: center;
 
-  .characters__search-icon{
+  .films__search-icon{
     color: $text;
   }
 
-  .characters__search-label{
+  .films__search-label{
     color: $text;
   }
 }

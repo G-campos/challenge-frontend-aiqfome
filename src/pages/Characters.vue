@@ -1,6 +1,6 @@
 <template>
   <v-container class="container">
-    <v-row class="characters__row-characters">
+    <v-row class="characters__row-sub-container">
 
       <v-col cols="12">
         <h1 class="characters__title">PERSONAGENS</h1>
@@ -112,6 +112,10 @@ export default {
   align-items: center;
   padding-right: 5vw;
   padding-left: 5vw;
+}
+
+.characters__row-sub-container{
+  max-width: 60vw;
 }
 
 .characters__title {
