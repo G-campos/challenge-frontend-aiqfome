@@ -1,151 +1,142 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
+  <v-container class="container">
+    <v-row class="characters__row-characters">
+
       <v-col cols="12">
-        <v-img
-            :src="require('../assets/logo.svg')"
-            class="my-3"
-            contain
-            height="200"
+        <h1 class="characters__title">FILMES</h1>
+      </v-col>
+
+      <v-col cols="12">
+        <v-text-field
+            v-model="searchCharacter"
+            class="characters__search"
+            dense
+        >
+          <template v-slot:prepend>
+            <v-icon
+                @click="getCharacters(searchCharacter)"
+                class="characters__search-icon">
+              mdi mdi-magnify
+            </v-icon>
+          </template>
+          <template v-slot:label>
+            <span class="characters__search-label">
+              FILTRE POR NOME DO FILME
+            </span>
+          </template>
+        </v-text-field>
+      </v-col>
+
+      <v-row>
+        <films-card
+            v-for="(film, index) in listFilms"
+            :key="index + 'film'"
+            :film="film"
+
         />
-      </v-col>
+      </v-row>
 
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-              href="https://community.vuetifyjs.com"
-              target="_blank"
-          >Discord Community</a>
-        </p>
-      </v-col>
-
-      <v-col
-          class="mb-5"
-          cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
-
-        <v-row justify="center">
-          <a
-              v-for="(next, i) in whatsNext"
-              :key="i"
-              :href="next.href"
-              class="subheading mx-3"
-              target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-          class="mb-5"
-          cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-              v-for="(link, i) in importantLinks"
-              :key="i"
-              :href="link.href"
-              class="subheading mx-3"
-              target="_blank"
-          >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
-
-      <v-col
-          class="mb-5"
-          cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
-
-        <v-row justify="center">
-          <a
-              v-for="(eco, i) in ecosystem"
-              :key="i"
-              :href="eco.href"
-              class="subheading mx-3"
-              target="_blank"
-          >
-            {{ eco.text }}
-          </a>
-        </v-row>
+      <v-col cols="12">
+        <div class="text-center">
+          <v-pagination
+              v-model="pagination.page"
+              :length="pagination.count"
+              :total-visible="4"
+              color="#FFE81F"
+              dark
+              @previous="getFilms(pagination.prevPage)"
+              @next="getFilms(pagination.nextPage)"
+          ></v-pagination>
+        </div>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+
+import FilmsCard from "@/components/FilmsCard";
 export default {
   name: 'FilmsPage',
-
+  components: { FilmsCard },
   data: () => ({
-    ecosystem: [
-      {
-        text: 'vuetify-loader',
-        href: 'https://github.com/vuetifyjs/vuetify-loader',
-      },
-      {
-        text: 'github',
-        href: 'https://github.com/vuetifyjs/vuetify',
-      },
-      {
-        text: 'awesome-vuetify',
-        href: 'https://github.com/vuetifyjs/awesome-vuetify',
-      },
-    ],
-    importantLinks: [
-      {
-        text: 'Documentation',
-        href: 'https://vuetifyjs.com',
-      },
-      {
-        text: 'Chat',
-        href: 'https://community.vuetifyjs.com',
-      },
-      {
-        text: 'Made with Vuetify',
-        href: 'https://madewithvuejs.com/vuetify',
-      },
-      {
-        text: 'Twitter',
-        href: 'https://twitter.com/vuetifyjs',
-      },
-      {
-        text: 'Articles',
-        href: 'https://medium.com/vuetify',
-      },
-    ],
-    whatsNext: [
-      {
-        text: 'Explore components',
-        href: 'https://vuetifyjs.com/components/api-explorer',
-      },
-      {
-        text: 'Select a layout',
-        href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-      },
-      {
-        text: 'Frequently Asked Questions',
-        href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-      },
-    ],
+    listFilms: [],
+
+    searchFilms: '',
+    pagination:{
+      page: 1,
+      count: 0,
+      nextPage: '',
+      prevPage: '',
+    }
   }),
+
+  watch: {
+
+  },
+  mounted() {
+    this.getFilms('https://swapi.dev/api/films')
+  },
+
+  methods: {
+    async getFilms(search) {
+      await axios.get(search)
+          .then((r) => {
+            this.listFilms = r.data.results
+            if (r.data.next) {
+              this.pagination.count = r.data.count / 5
+            }
+            this.pagination.nextPage = r.data.next
+            this.pagination.prevPage = r.data.previous
+
+            return console.log('getFilms=> ',this.listFilms)
+          }).catch((e) => {
+            console.error(e)
+          }).finally(() => {
+              return this.mesage = ''
+          })
+    }
+  },
 }
 </script>
+<style lang="scss">
+@import "@/assets/my-styles.scss";
+.container{
+  min-width: 100vw;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5vw;
+  padding-left: 5vw;
+}
+
+.characters__title {
+  font-family: 'StarJedi';
+  font-weight: bold;
+  color: $title;
+  text-align: center;
+  opacity: 1;
+}
+
+.characters__search{
+  background: $shape;
+  max-width: 570px;
+  border: solid 2px #606060 !important;
+  color: $text;
+  align-content: center;
+  align-items: center;
+
+  .characters__search-icon{
+    color: $text;
+  }
+
+  .characters__search-label{
+    color: $text;
+  }
+}
+
+</style>
